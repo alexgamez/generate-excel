@@ -3,9 +3,9 @@
 one:
   title: MyString
   genre: MyString
-  plataform: MyString
+  platform: MyString
 
 two:
   title: MyString
   genre: MyString
-  plataform: MyString
+  platform: MyString

@@ -15,7 +15,7 @@ class GamesTest < ApplicationSystemTestCase
     click_on "New Game"
 
     fill_in "Genre", with: @game.genre
-    fill_in "Plataform", with: @game.plataform
+    fill_in "platform", with: @game.platform
     fill_in "Title", with: @game.title
     click_on "Create Game"
 
@@ -28,7 +28,7 @@ class GamesTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Genre", with: @game.genre
-    fill_in "Plataform", with: @game.plataform
+    fill_in "platform", with: @game.platform
     fill_in "Title", with: @game.title
     click_on "Update Game"
 
