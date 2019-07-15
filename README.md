@@ -1,24 +1,22 @@
-# README
+# Generate-Excel
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Proyecto para generar hojas de Excel  utilizando la gema: axlsx.
 
-Things you may want to cover:
+### Instalación 🔧
 
-* Ruby version
+Para ver el funcionamiento de la aplicación, utiliza estos comandos después de descargarlo
+```
+bundle install && bundle update 
+rake db:migrate
+rake db:seed
+```
+y accede a localhost:3000 desde tu navegador.
+En la parte superior aparecerán 2 links para descargar el ejemplo de hojas de Excel.
 
-* System dependencies
+### Pre-requisitos 📋
 
-* Configuration
+```
+ruby 2.6.3
+rails 5.2.3
+```
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
