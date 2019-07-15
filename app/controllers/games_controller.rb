@@ -61,6 +61,16 @@ class GamesController < ApplicationController
     end
   end
 
+  def basic_xls_report
+    @games = Game.all
+    render xlsx: 'basic_report', template: 'reports/basic_report.xlsx.axlsx'
+  end
+
+  def custom_xls_report
+    @games = Game.all
+    render xlsx: 'custom_report', template: 'reports/custom_report.xlsx.axlsx'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game

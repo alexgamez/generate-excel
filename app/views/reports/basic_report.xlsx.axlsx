@@ -1,0 +1,25 @@
+# create a workbook
+wb = xlsx_package.workbook
+
+# create styles
+wb.styles do |s|
+  header_cell = s.add_style bg_color: "EFEFEF",
+  fg_color: "00",
+  sz: 14,
+  alignment: { horizontal: :center }
+
+  # create a sheet in that workbook
+  wb.add_worksheet(name: "game-list") do |sheet|
+    sheet.add_row ["ID", "Title", "Genre", "Platform"],
+      :style => [header_cell, header_cell, header_cell, header_cell]
+
+    @games.each do |t|
+      # create a new row in an excel sheet
+      sheet.add_row [t[:id],
+            t[:title],
+            t[:genre],
+            t[:platform]]
+    end
+
+  end
+end

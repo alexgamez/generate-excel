@@ -1,0 +1,59 @@
+# create a workbook
+wb = xlsx_package.workbook
+
+# create styles
+wb.styles do |s|
+  header_cell = s.add_style bg_color: "EFEFEF",
+  fg_color: "00",
+  sz: 14,
+  alignment: { horizontal: :center }
+
+  header_cell_2 =  s.add_style  :bg_color => "33b5ff", :fg_color => "FF", :sz => 14, :alignment => { :horizontal=> :center }
+
+  # create a sheet in that workbook
+  wb.add_worksheet(name: "game-list") do |sheet|
+
+    # add image to the sheet
+    img = File.expand_path(Rails.root+'app/assets/images/logo.png')
+    sheet.add_image(:image_src => img, :noSelect => true, :noMove => true, :end_at => true) do |image|
+      image.start_at 0, 0
+      image.end_at 3, 5
+    end
+
+    sheet.add_row
+    sheet.add_row
+    sheet.add_row
+    sheet.add_row
+    sheet.add_row
+
+    sheet.add_row ["ID", "Title", "Genre", "Platform", "", "", "", "", "", "Genre", "Quantity"],
+      :style => [header_cell, header_cell, header_cell, header_cell , nil, nil, nil, nil, nil, header_cell_2, header_cell_2]
+
+    sheet.column_widths nil, nil, nil, nil, nil, nil, nil, nil, nil, 30, 15
+
+    @games.each do |t|
+      # create a new row in an excel sheet
+      sheet.add_row [t[:id],
+            t[:title],
+            t[:genre],
+            t[:platform], nil, nil, nil, nil, nil, nil, nil]
+    end
+
+    index_row = 6
+    @games.group(:genre).count.each do |genre_count|
+
+      sheet.rows[index_row].cells[9].value =  genre_count.first
+      sheet.rows[index_row].cells[10].type = :integer
+      sheet.rows[index_row].cells[10].value = genre_count.second
+
+    index_row+=1
+    end
+
+    index_row+=2
+
+    sheet.add_chart(Axlsx::Bar3DChart, :start_at => "J"+index_row.to_s, :end_at => "O"+(index_row+20).to_s) do |chart|
+      chart.add_series :data => sheet["K7:K#{index_row-2}"], :labels => sheet["J7:J#{index_row-2}"], :title => sheet["J6"], :colors => ["00FF00", "0000FF"]
+    end
+
+  end
+end
